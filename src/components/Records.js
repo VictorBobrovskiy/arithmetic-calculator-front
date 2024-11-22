@@ -1,4 +1,3 @@
-// src/components/Records/Records.jsx
 import React, { useState, useEffect } from 'react';
 import { 
   Card, 
@@ -10,6 +9,8 @@ import {
   Alert, 
   Spinner 
 } from 'react-bootstrap';
+import { api } from './api';
+
 
 const Records = () => {
   const [records, setRecords] = useState([]);
@@ -25,7 +26,7 @@ const Records = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(
+      const response = await api.get(
         `/api/v1/records?page=${page}&size=${size}&search=${encodeURIComponent(search)}`,
         {
           headers: {
@@ -59,7 +60,7 @@ const Records = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`/api/v1/records/${id}`, {
+      const response = await api.delete(`/api/v1/records/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`

@@ -42,7 +42,7 @@ const Calculator = () => {
     setResult(null);
     
     try {
-      const response = await api.post('http://localhost:8081/api/v1/operations', {
+      const response = await api.post('/api/v1/operations', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
